@@ -2,7 +2,7 @@
   <div class="app-container">
     <Form v-slot="{ values }" :validation-schema="schema" @submit="submitForm">
       <Table
-        :row-selection="rowSelection(values)"
+        :row-selection="rowSelection"
         :columns="columns"
         :data-source="tableData"
         :row-key="'id'"
@@ -105,21 +105,21 @@ const selectedData = ref<SelectedData>({
   keys: [],
 });
 
-const addFields = (values: any) => {
-  values.user = (values.user || []).concat([{}]);
-};
-const removeFields = (i: number, values: any) => {
-  const v = values.user.filter((_, index: number) => {
-    return i !== index;
-  });
-  values.user = v;
-};
-const findRemoveIndex = (dest: any[], src: any[]) => {
-  const difference = dest.filter((item) => !src.includes(item));
-  const removedItem = difference[0];
-  return dest.indexOf(removedItem);
-};
-const rowSelection = (values: any) => ({
+// const addFields = (values: any) => {
+//   values.user = (values.user || []).concat([{}]);
+// };
+// const removeFields = (i: number, values: any) => {
+//   const v = values.user.filter((_, index: number) => {
+//     return i !== index;
+//   });
+//   values.user = v;
+// };
+// const findRemoveIndex = (dest: any[], src: any[]) => {
+//   const difference = dest.filter((item) => !src.includes(item));
+//   const removedItem = difference[0];
+//   return dest.indexOf(removedItem);
+// };
+const rowSelection = {
   onChange: (
     selectedRowKeys: (string | number)[],
     selectedRows: TableDataItem[]
@@ -128,17 +128,17 @@ const rowSelection = (values: any) => ({
     console.log("selectedRows", selectedRows);
     console.log("selectedData", selectedData.value);
 
-    // add
-    if (selectedData.value.rows.length < selectedRows.length) {
-      console.log("add", values);
-      addFields(values);
-    }
-    // remove
-    else {
-      console.log("remove", values);
-      const idx = findRemoveIndex(selectedData.value.keys, selectedRowKeys);
-      removeFields(idx, values);
-    }
+    // // add
+    // if (selectedData.value.rows.length < selectedRows.length) {
+    //   console.log("add", values);
+    //   addFields(values);
+    // }
+    // // remove
+    // else {
+    //   console.log("remove", values);
+    //   const idx = findRemoveIndex(selectedData.value.keys, selectedRowKeys);
+    //   removeFields(idx, values);
+    // }
 
     selectedData.value.rows = selectedRows;
     selectedData.value.keys = selectedRowKeys;
@@ -148,7 +148,7 @@ const rowSelection = (values: any) => ({
     disabled: record.checkDisabled,
     style: record.checkDisabled ? "display: none;" : "",
   }),
-});
+};
 
 const test = ref([
   {

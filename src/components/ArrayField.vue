@@ -1,6 +1,6 @@
 <template>
   <div class="flex-column">
-    <template v-for="(row, idx) in selectedData.rows">
+    <template v-for="(row, idx) in selectedData.rows" :key="row.id">
       <Field
         :name="`user[${idx}].port`"
         v-slot="{ errorMessage, handleChange }"
