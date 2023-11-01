@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <Form v-slot="{ values }" @submit="submitForm">
+    <Form v-slot="{ values }" :validation-schema="schema" @submit="submitForm">
       <Table
         :row-selection="rowSelection(values)"
         :columns="columns"
@@ -56,6 +56,7 @@ import { ref } from "vue";
 import ArrayViewer from "./components/ArrayViewer.vue";
 import { Form, defineRule } from "vee-validate";
 import ArrayField from "./components/ArrayField.vue";
+import { ApartmentOutlined, FolderOutlined } from "@ant-design/icons-vue";
 
 /**
  * a table component 의 columns 을 정의하는 data
@@ -209,14 +210,7 @@ defineRule("conInputRequired", (value: string | number, data: string[]) => {
   }
   return true;
 });
-// 숫자만 입력 가능 유효성 체크
-defineRule("conInputOnlyNumber", (value: string) => {
-  const regex = /^[0-9]+$/;
-  if (!regex.test(value)) {
-    return `숫자만 입력 가능 합니다.`;
-  }
-  return true;
-});
+
 // 0 이상 정수(자연수)만 입력 가능 유효성 체크
 defineRule("conInputOnlyNaturalNumber", (value: string) => {
   const regex = /^[0-9]*$/;
@@ -231,6 +225,46 @@ const submitForm = () => {
   console.log("제출");
   isSubmitted.value = true;
 };
+
+// const schema = {
+//   user: [
+//     {
+//       weight: {
+//         conInputRequired: "가중치",
+//         conInputOnlyNumber: String,
+//         conInputOnlyNaturalNumber: String,
+//       },
+//       port: {
+//         conInputRequired: "포트",
+//         conInputOnlyNumber: String,
+//         conInputOnlyNaturalNumber: String,
+//       },
+//     },
+//   ],
+// };
+const schema = undefined;
+
+// const schema = yup.object().shape({
+//   user: yup
+//     .array()
+//     .of(
+//       yup.object().shape({
+//         weight: {
+//           conInputRequired: "가중치",
+//           conInputOnlyNumber: String,
+//           conInputOnlyNaturalNumber: String,
+//         },
+//         port: {
+//           conInputRequired: "포트",
+//           conInputOnlyNumber: String,
+//           conInputOnlyNaturalNumber: String,
+//         },
+//         // weight: yup.required().number().min(1).label("weight"),
+//         // port: yup.required().number().min(1).label("port"),
+//       })
+//     )
+//     .strict(),
+// });
 </script>
 
 <style scoped>

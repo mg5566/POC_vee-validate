@@ -5,7 +5,7 @@
         :name="`user[${idx}].port`"
         v-slot="{ errorMessage, handleChange }"
         v-model="selectedData.rows[idx].port"
-        rules="conInputRequired:'포트'|conInputOnlyNumber|conInputOnlyNaturalNumber"
+        rules="conInputRequired:'포트'|conInputOnlyNaturalNumber"
       >
         <a-form-item
           :label="idx === 0 ? '포트' : ''"
@@ -20,11 +20,12 @@
           />
         </a-form-item>
       </Field>
+
       <Field
         :name="`user[${idx}].weight`"
         v-slot="{ errorMessage, handleChange }"
         v-model="selectedData.rows[idx].weight"
-        rules="conInputRequired:'가중치'|conInputOnlyNumber|conInputOnlyNaturalNumber"
+        rules="conInputRequired:'가중치'|conInputOnlyNaturalNumber"
       >
         <a-form-item
           :label="idx === 0 ? '가중치' : ''"
