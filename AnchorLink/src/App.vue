@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import POCAnchor from "./components/POCAnchor.vue";
-</script>
-
 <template>
   <div id="head">
     <a href="https://vitejs.dev" target="_blank">
@@ -13,19 +8,24 @@ import POCAnchor from "./components/POCAnchor.vue";
     </a>
   </div>
   <div>
-    <a href="#test1">Go to Test1</a>
-    <a href="#test2">Go to Test2</a>
-    <a href="#test3">Go to Test3</a>
-    <a href="#test4">Go to Test4</a>
-    <a href="#test5">Go to Test5</a>
-    <a href="#test6">Go to Test6</a>
+    <a href="#test6">anchor tag test6</a>
+    <RouterLink :to="{ hash: '#test1' }">Go to Test1</RouterLink>
+    <RouterLink :to="{ hash: '#test2' }">Go to Test2</RouterLink>
+    <RouterLink :to="{ hash: '#test3' }">Go to Test3</RouterLink>
+    <RouterLink :to="{ hash: '#test4' }">Go to Test4</RouterLink>
+    <RouterLink :to="{ hash: '#test5' }">Go to Test5</RouterLink>
+    <RouterLink :to="{ path: '/home', hash: '#test6' }">Go to Test6</RouterLink>
   </div>
-  <HelloWorld msg="Vite + Vue" />
-  <POCAnchor />
+  <RouterView></RouterView>
   <div>
-    <a href="#head">Go to Head</a>
+    <RouterLink :to="{ path: '/home', hash: '#head' }">Go to Head</RouterLink>
+    <a href="#head">anchor tag head</a>
   </div>
 </template>
+
+<script setup lang="ts">
+import { RouterLink, RouterView } from "vue-router";
+</script>
 
 <style scoped>
 .logo {
