@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import POCAnchor from "./components/POCAnchor.vue";
 </script>
 
 <template>
-  <div>
+  <div id="head">
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
@@ -11,7 +12,19 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <div>
+    <a href="#test1">Go to Test1</a>
+    <a href="#test2">Go to Test2</a>
+    <a href="#test3">Go to Test3</a>
+    <a href="#test4">Go to Test4</a>
+    <a href="#test5">Go to Test5</a>
+    <a href="#test6">Go to Test6</a>
+  </div>
   <HelloWorld msg="Vite + Vue" />
+  <POCAnchor />
+  <div>
+    <a href="#head">Go to Head</a>
+  </div>
 </template>
 
 <style scoped>
